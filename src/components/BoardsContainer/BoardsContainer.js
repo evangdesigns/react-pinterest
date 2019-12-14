@@ -1,6 +1,7 @@
 import React from 'react';
 import authData from '../../helpers/data/authData';
 import boardData from '../../helpers/data/boardData';
+import Board from '../Board/Board';
 
 class BoardContainer extends React.Component {
   state = {
@@ -17,7 +18,9 @@ class BoardContainer extends React.Component {
 
   render() {
     return (
-    <div>{this.state.boards.map((board) => <h6>{board.name}</h6>)}</div>
+    <div className="d-flex flex-wrap justify-content-center">
+      {this.state.boards.map((board) => <Board key={board.id} board={board} />)}
+    </div>
     );
   }
 }
