@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import authData from '../../helpers/data/authData';
 import boardData from '../../helpers/data/boardData';
 import Board from '../Board/Board';
 
 class BoardContainer extends React.Component {
+  static propTypes = {
+    setSingleBoard: PropTypes.func,
+  }
+
   state = {
     boards: [],
   }
@@ -17,9 +22,11 @@ class BoardContainer extends React.Component {
   }
 
   render() {
+    const { setSingleBoard } = this.props;
+
     return (
     <div className="d-flex flex-wrap justify-content-center">
-      {this.state.boards.map((board) => <Board key={board.id} board={board} />)}
+      {this.state.boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard}/>)}
     </div>
     );
   }
