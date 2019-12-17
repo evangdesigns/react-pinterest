@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import boardData from '../../helpers/data/boardData';
 import pinData from '../../helpers/data/pinData';
 import Pin from '../Pin/pin';
+import PinForm from '../PinForm/PinForm';
 
 class SingleBoard extends React.Component {
   static propTypes = {
@@ -47,11 +48,22 @@ class SingleBoard extends React.Component {
     setSingleBoard(null);
   }
 
+  addPin = (newPin) => {
+    const { selectedBoardId } = this.props;
+    pinData.addPin(newPin)
+      .then(() => {
+        this.getPinData(selectedBoardId);
+      })
+      .catch((errorFromAddPin) => console.error({ errorFromAddPin }));
+  }
+
   render() {
     const { board, pins } = this.state;
+    const { selectedBoardId } = this.props;
     return (
       <div>
         <button className="btn btn-info" onClick={this.removeSelectedBoardId}>x Close Board View</button>
+        <PinForm boardId={selectedBoardId} addPin={this.addPin}/>
         <div className="SingleBoard col-8 offset-2">
           <h2>{board.name}</h2>
           <p>{board.description}</p>
