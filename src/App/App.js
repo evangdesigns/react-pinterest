@@ -1,10 +1,12 @@
 import React from 'react';
 import firebase from 'firebase/app';
+
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-import BoardContainer from '../components/BoardsContainer/BoardsContainer';
 import SingleBoard from '../components/SingleBoard/SingleBoard';
+import BoardsContainer from '../components/BoardsContainer/BoardsContainer';
+
 import './App.scss';
 
 firebaseConnection();
@@ -35,15 +37,13 @@ class App extends React.Component {
 
   renderView = () => {
     const { authed, selectedBoardId } = this.state;
-
     if (!authed) {
       return (<Auth />);
     }
-
     if (!selectedBoardId) {
-      return (<BoardContainer setSingleBoard={this.setSingleBoard} />);
+      return (<BoardsContainer setSingleBoard={this.setSingleBoard} />);
     }
-    return (<SingleBoard selectedBoardId={selectedBoardId} setSingleBoard={this.setSingleBoard} />);
+    return (<SingleBoard selectedBoardId={selectedBoardId} setSingleBoard={this.setSingleBoard}/>);
   }
 
   render() {
@@ -51,10 +51,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <MyNavbar authed={authed}/>
-        {
-          this.renderView()
-        }
+        <MyNavbar authed={authed} />
+        { this.renderView() }
       </div>
     );
   }
