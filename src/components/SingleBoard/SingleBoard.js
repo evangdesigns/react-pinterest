@@ -64,7 +64,7 @@ class SingleBoard extends React.Component {
       <div>
         <button className="btn btn-info" onClick={this.removeSelectedBoardId}>x Close Board View</button>
         <PinForm boardId={selectedBoardId} addPin={this.addPin}/>
-        <div className="SingleBoard col-8 offset-2">
+        <div className="SingleBoard col-8">
           <h2>{board.name}</h2>
           <p>{board.description}</p>
           <div className="d-flex flex-wrap">
